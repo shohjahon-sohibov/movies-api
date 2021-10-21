@@ -1,6 +1,9 @@
 const elLoader  = $_('.loader')
 const elFilmsList = $_('.js-films-list');
 
+const elPrev = $_('.prev');
+const elNext = $_('.next');
+
 let page = 1;
 
 // ==============================================
@@ -53,9 +56,6 @@ function renderFilms (object) {
 // ============================================
 // ================= buttons function ============
 // ============================================
-
-const elPrev = $_('.prev');
-const elNext = $_('.next');
 
 elNext.addEventListener("click", nextPage);
 function nextPage() {
