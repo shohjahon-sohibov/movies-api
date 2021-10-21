@@ -1,8 +1,8 @@
-const elLoader  = document.querySelector('.loader')
-const elFilmsList = document.querySelector('.js-films-list');
+const elLoader  = $_('.loader')
+const elFilmsList = $_('.js-films-list');
 
-const elPrev = document.querySelector('.prev');
-const elNext = document.querySelector('.next');
+const elPrev = $_('.prev');
+const elNext = $_('.next');
 
 let page = 1;
 
