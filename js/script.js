@@ -9,7 +9,7 @@ let page = 1;
 // ==============================================
 
 function getData() {
-  fetch(`http://www.omdbapi.com/?s=marvel&apikey=3855c4ee&page=${page}`)
+  fetch(`https://www.omdbapi.com/?s=marvel&apikey=3855c4ee&page=${page}`)
 .then((response) => response.json())
 .then((data) => {
   console.log(data);
