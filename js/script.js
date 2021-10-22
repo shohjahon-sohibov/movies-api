@@ -1,19 +1,50 @@
 const elLoader  = $_('.loader')
 const elFilmsList = $_('.js-films-list');
-
+const elSearchForm = $_('.js-search-form');
+const elSearchInput = $_('.js-search-form__input');
 const elPrev = $_('.prev');
 const elNext = $_('.next');
 
-let page = 1;
+
+let page = 18;
+
+elLoader.style.display = 'none'
 
 // ==============================================
 
-function getData() {
-  fetch(`https://www.omdbapi.com/?s=marvel&apikey=3855c4ee&page=${page}`)
+elSearchForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  elLoader.style.display = 'block'
+  const inputValue = elSearchInput.value.trim()
+  getData(page, inputValue)
+})
+
+elSearchInput.focus()
+
+function getData(page, value) {
+  fetch(`https://www.omdbapi.com/?s=&apikey=3855c4ee&s=${value}&page=${page}`)
 .then((response) => response.json())
 .then((data) => {
-  console.log(data);
+  console.log(data.totalResults);
   
+  if (page <= 1) {
+    elPrev.disabled = true
+  }
+  if (page > 1) {
+    elPrev.disabled = false
+  }
+  if (page == Math.ceil(data.totalResults / 10)) {
+    elNext.disabled = true
+  }
+  if (page < Math.ceil(data.totalResults / 10)) {
+    elNext.disabled = false
+  } 
+  if (Math.ceil(data.totalResults / 10) < 2) {
+    elPrev.disabled = true
+    elNext.disabled = true
+  }
+
   elLoader.style.display = 'none'
   working(data.Search)
 });
@@ -57,26 +88,26 @@ function renderFilms (object) {
 // ================= buttons function ============
 // ============================================
 
-elNext.addEventListener("click", nextPage);
-function nextPage() {
-  elFilmsList.innerHTML = "";
-  page = page + 1;
-  getData(page);
-};
-
-getData(page);
-
-elPrev.addEventListener("click", prevPage)
+// =============  prev button function=====
 function prevPage() {
-  elFilmsList.innerHTML = "";
   page = page - 1;
-  getData(page);
+
+  elFilmsList.innerHTML = "";
+  elLoader.style.display = "block";
+  const inputValue = elSearchInput.value.trim()
+  getData(page, inputValue);
 };  
+elPrev.addEventListener("click", prevPage)
 
-getData(page);
+// =============  next button function=====
 
-// window.history.back();
+function nextPage() {
+  page = page + 1;
 
-
-
+  elFilmsList.innerHTML = "";
+  elLoader.style.display = "block";
+  const inputValue = elSearchInput.value.trim()
+  getData(page, inputValue);
+};
+elNext.addEventListener("click", nextPage);
 

@@ -1,3 +1,17 @@
+body {
+  background-color: #555;
+}
+
+.js-search-form {
+margin-left: auto;
+margin-right: auto;
+}
+
+.js-search-form__input {
+  border: none;
+  border-radius: 5px;
+}
+
 .loader {
   width: 100vh;
   height: 100vh;
@@ -80,15 +94,28 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(5,5,10,1) 57%, rgba(1
 }
 
 .prev {
+  z-index: 50;
+  position: fixed;
+  top: 50%;
+  left: -15%;
   margin-left: 200px;
+  border: none;
+  border-radius: 8px;
 }
 
 .next {
+  z-index: 50;
+  position: fixed;
+  top: 50%;
+  right: -0.3%;
   margin-left: 715px;
   margin-bottom: 50px;
+  border: none;
+  border-radius: 8px;
 }
 
 .footer {
+  display: none;
   padding-left: 50px;
   padding-top: 20px;
   padding-bottom: 40px;
